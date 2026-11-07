@@ -113,7 +113,7 @@ function TeacherDashboard() {
           <ul className="mt-2 space-y-1.5 text-sm">
             {ERROR_CAUSES.map((c) => (
               <li key={c.key} className="flex items-center gap-2">
-                <span className="size-2.5 rounded-full" style={{ background: `var(--chart-${["comprension", "noentrega", "atencion", "tiempo", "otros"].indexOf(c.key) === 0 ? 1 : ["", "3", "4", "2", "5"][["comprension", "noentrega", "atencion", "tiempo", "otros"].indexOf(c.key)]})` }} />
+                <span className="size-2.5 rounded-full" style={{ background: causesConfig[c.key as keyof typeof causesConfig].color }} />
                 <span className="flex-1 text-muted-foreground">{c.cause}</span>
                 <span className="font-bold">{c.value}%</span>
               </li>

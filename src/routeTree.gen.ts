@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfesorRouteImport } from './routes/profesor'
+import { Route as ProfesorIndexRouteImport } from './routes/profesor.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,38 @@ const ProfesorRoute = ProfesorRouteImport.update({
   path: '/profesor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfesorIndexRoute = ProfesorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfesorRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/profesor': typeof ProfesorRoute
+  '/profesor': typeof ProfesorRouteWithChildren
+  '/profesor/': typeof ProfesorIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/profesor': typeof ProfesorRoute
+  '/profesor': typeof ProfesorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/profesor': typeof ProfesorRoute
+  '/profesor': typeof ProfesorRouteWithChildren
+  '/profesor/': typeof ProfesorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profesor'
+  fullPaths: '/' | '/profesor' | '/profesor/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/profesor'
-  id: '__root__' | '/' | '/profesor'
+  id: '__root__' | '/' | '/profesor' | '/profesor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProfesorRoute: typeof ProfesorRoute
+  ProfesorRoute: typeof ProfesorRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +73,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfesorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profesor/': {
+      id: '/profesor/'
+      path: '/'
+      fullPath: '/profesor/'
+      preLoaderRoute: typeof ProfesorIndexRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
   }
 }
 
+interface ProfesorRouteChildren {
+  ProfesorIndexRoute: typeof ProfesorIndexRoute
+}
+
+const ProfesorRouteChildren: ProfesorRouteChildren = {
+  ProfesorIndexRoute: ProfesorIndexRoute,
+}
+
+const ProfesorRouteWithChildren = ProfesorRoute._addFileChildren(
+  ProfesorRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ProfesorRoute: ProfesorRoute,
+  ProfesorRoute: ProfesorRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
