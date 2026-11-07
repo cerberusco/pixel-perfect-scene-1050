@@ -56,7 +56,7 @@ const RESPONSES: { keys: string[]; reply: string }[] = [
       "La tarea de Hugo para el jueves es **«Fracciones en la finca»**. Una fracción es solo **repartir algo en partes iguales**.\n\n1. **Coge una tortilla o un queso** y córtalo en 4 trozos iguales. Cada trozo es **1/4** (uno de cuatro).\n2. **El número de abajo** dice en cuántas partes has cortado. **El de arriba**, cuántas partes coges. Si os coméis 3 trozos: **3/4**.\n3. **Con el campo:** si una tierra tiene 4 parcelas iguales y sembráis 3, está sembrada **3/4** de la tierra. Es justo la primera pregunta de su tarea.\n4. **Mitades iguales:** corta una naranja en 2 (1/2) y otra en 6. Si coges 3 de 6, comes lo mismo que media naranja: **3/6 = 1/2**.\n\n💡 Deja que él corte y reparta. Tocar las cosas ayuda mucho más que mirar el libro.",
   },
   {
-    keys: ["no quiere", "deberes", "motiv", "pereza", "se niega", "llora", "cansado"],
+    keys: ["no quiere", "ganas", "motiv", "pereza", "se niega", "llora", "cansado", "no hace"],
     reply:
       "Es muy normal, sobre todo después de un día largo. Algunas ideas que funcionan:\n\n1. **Bloques cortos:** la maestra ha dividido las tareas de Hugo en partes de 10 minutos. Haced una parte, descanso, y otra.\n2. **Mismo sitio y hora:** por ejemplo, después de merendar en la mesa de la cocina. La rutina quita discusiones.\n3. **Tú también «trabajas» a su lado:** mientras él hace la tarea, tú lees o apuntas cosas de la finca. Se siente acompañado.\n4. **Celebra el esfuerzo, no la nota:** «Qué bien que lo has intentado» motiva más que «muy bien, un 10».\n\nSi sigue costando, pulsa en **avisar a la maestra** y lo hablaréis juntos.",
   },
@@ -66,7 +66,7 @@ const RESPONSES: { keys: string[]; reply: string }[] = [
       "Lucía tiene 3 años y su tarea es **«Contamos manzanas»** (3 minutos, solo con dibujos y voz). Para reforzar en casa:\n\n1. **Contad cosas de verdad:** huevos del gallinero, zapatos en la puerta, ovejas en el corral. Tocad cada cosa al decir el número.\n2. **Hasta 5 es suficiente** a su edad. No hace falta que escriba los números.\n3. **Más y menos:** pon 2 galletas en un plato y 4 en otro. «¿Dónde hay más?».\n4. **Juego de dedos:** «enséñame 3 dedos». Le encanta y aprende sin darse cuenta.\n\n⭐ Cuando termine la tarea en la tablet le saldrán estrellas y confeti. ¡Pídele que te las enseñe!",
   },
   {
-    keys: ["fotosíntesis", "fotosintesis", "planta", "plantas", "hojas", "raíz", "raiz"],
+    keys: ["fotosíntesis", "fotosintesis", "planta", "plantas", "hojas"],
     reply:
       "La **fotosíntesis** es cómo **las plantas fabrican su comida**. Tú lo sabes de sobra aunque no lo llames así:\n\n1. **La raíz bebe** el agua de la tierra (por eso regáis).\n2. **Las hojas toman la luz del sol** y el aire. Por eso una planta a la sombra crece peor.\n3. **Con agua + luz + aire** la planta fabrica azúcar, que es su alimento, y suelta **oxígeno**, el aire que respiramos.\n4. **Experimento:** tapad una hoja de una planta con papel de aluminio una semana. Se pondrá más pálida porque no ha podido «comer» luz.\n\n💡 Pregúntale: «¿Por qué crees que el trigo necesita sol?». Si dice que es para hacer su comida, ¡lo ha entendido!",
   },
