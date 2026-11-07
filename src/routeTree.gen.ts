@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfesorRouteImport } from './routes/profesor'
 import { Route as ProfesorIndexRouteImport } from './routes/profesor.index'
+import { Route as ProfesorLicenciasRouteImport } from './routes/profesor.licencias'
+import { Route as ProfesorTareasRouteImport } from './routes/profesor.tareas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,28 +30,55 @@ const ProfesorIndexRoute = ProfesorIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProfesorRoute,
 } as any)
+const ProfesorLicenciasRoute = ProfesorLicenciasRouteImport.update({
+  id: '/licencias',
+  path: '/licencias',
+  getParentRoute: () => ProfesorRoute,
+} as any)
+const ProfesorTareasRoute = ProfesorTareasRouteImport.update({
+  id: '/tareas',
+  path: '/tareas',
+  getParentRoute: () => ProfesorRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/profesor': typeof ProfesorRouteWithChildren
+  '/profesor/licencias': typeof ProfesorLicenciasRoute
+  '/profesor/tareas': typeof ProfesorTareasRoute
   '/profesor/': typeof ProfesorIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/profesor/licencias': typeof ProfesorLicenciasRoute
+  '/profesor/tareas': typeof ProfesorTareasRoute
   '/profesor': typeof ProfesorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/profesor': typeof ProfesorRouteWithChildren
+  '/profesor/licencias': typeof ProfesorLicenciasRoute
+  '/profesor/tareas': typeof ProfesorTareasRoute
   '/profesor/': typeof ProfesorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/profesor' | '/profesor/'
+  fullPaths:
+    | '/'
+    | '/profesor'
+    | '/profesor/licencias'
+    | '/profesor/tareas'
+    | '/profesor/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/profesor'
-  id: '__root__' | '/' | '/profesor' | '/profesor/'
+  to: '/' | '/profesor/licencias' | '/profesor/tareas' | '/profesor'
+  id:
+    | '__root__'
+    | '/'
+    | '/profesor'
+    | '/profesor/licencias'
+    | '/profesor/tareas'
+    | '/profesor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,14 +109,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfesorIndexRouteImport
       parentRoute: typeof ProfesorRoute
     }
+    '/profesor/licencias': {
+      id: '/profesor/licencias'
+      path: '/licencias'
+      fullPath: '/profesor/licencias'
+      preLoaderRoute: typeof ProfesorLicenciasRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
+    '/profesor/tareas': {
+      id: '/profesor/tareas'
+      path: '/tareas'
+      fullPath: '/profesor/tareas'
+      preLoaderRoute: typeof ProfesorTareasRouteImport
+      parentRoute: typeof ProfesorRoute
+    }
   }
 }
 
 interface ProfesorRouteChildren {
+  ProfesorLicenciasRoute: typeof ProfesorLicenciasRoute
+  ProfesorTareasRoute: typeof ProfesorTareasRoute
   ProfesorIndexRoute: typeof ProfesorIndexRoute
 }
 
 const ProfesorRouteChildren: ProfesorRouteChildren = {
+  ProfesorLicenciasRoute: ProfesorLicenciasRoute,
+  ProfesorTareasRoute: ProfesorTareasRoute,
   ProfesorIndexRoute: ProfesorIndexRoute,
 }
 
