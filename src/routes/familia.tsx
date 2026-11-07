@@ -32,7 +32,7 @@ function Tab({ to, icon: Icon, label, exact }: { to: "/familia" | "/familia/asis
   return (
     <Link
       to={to}
-      activeOptions={{ exact }}
+      activeOptions={{ exact: exact ?? false }}
       className="flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-base font-bold text-muted-foreground transition-all data-[status=active]:bg-primary data-[status=active]:text-primary-foreground data-[status=active]:shadow-glow"
     >
       <Icon className="size-5" /> {label}

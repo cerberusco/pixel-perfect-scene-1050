@@ -27,7 +27,7 @@ const weekConfig = { value: { label: "Tareas", color: "var(--chart-2)" } } satis
 function FamilyHome() {
   const childId = useAula((s) => s.familyChild);
   const tasks = useAula((s) => s.tasks.filter((t) => t.studentId === childId));
-  const stars = useAula((s) => s.stars[childId]);
+  const stars = useAula((s) => s.stars[childId] ?? 0);
   const child = STUDENTS.find((s) => s.id === childId)!;
   const done = tasks.filter((t) => t.status === "hecha").length;
   const pct = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
@@ -65,7 +65,7 @@ function FamilyHome() {
         <motion.section variants={rise} className="glass rounded-3xl p-5">
           <p className="font-bold">Tareas hechas cada día</p>
           <ChartContainer config={weekConfig} className="mt-2 h-[130px] w-full">
-            <BarChart data={FAMILY_WEEK[childId]}>
+            <BarChart data={FAMILY_WEEK[childId] ?? []}>
               <XAxis dataKey="day" tickLine={false} axisLine={false} />
               <Bar dataKey="value" fill="var(--color-value)" radius={10} barSize={28} />
             </BarChart>
@@ -74,7 +74,7 @@ function FamilyHome() {
 
         <motion.section variants={rise} className="space-y-3">
           <h2 className="text-xl font-semibold">Avisos</h2>
-          {FAMILY_ALERTS[childId].map((a, i) => (
+          {(FAMILY_ALERTS[childId] ?? []).map((a, i) => (
             <div key={i} className={cn("glass flex items-start gap-3 rounded-2xl border-l-8 p-4", a.level === "warn" ? "border-l-warning" : a.level === "ok" ? "border-l-success" : "border-l-sky")}>
               <span className="text-3xl">{a.icon}</span>
               <div className="flex-1">

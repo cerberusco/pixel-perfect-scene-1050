@@ -39,7 +39,7 @@ function Exercise() {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
 
-  const q = task.questions[index];
+  const q = task.questions[index]!;
 
   useEffect(() => {
     if (!finished) speak(q.prompt);
@@ -52,7 +52,7 @@ function Exercise() {
       chimeSuccess();
       void confettiSmall();
       const gained = firstTry ? 1 : 0;
-      speak(["¡Muy bien!", "¡Genial!", "¡Lo has conseguido!"][index % 3]);
+      speak(["¡Muy bien!", "¡Genial!", "¡Lo has conseguido!"][index % 3] ?? "¡Muy bien!");
       setTimeout(() => {
         const newScore = score + gained;
         setScore(newScore);

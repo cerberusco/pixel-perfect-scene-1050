@@ -85,7 +85,7 @@ function StudentHome() {
                 <Link
                   to="/alumno/$studentId/tarea/$taskId"
                   params={{ studentId: student.id, taskId: t.id }}
-                  onClick={() => speak(t.questions[0].prompt)}
+                  onClick={() => speak(t.questions[0]?.prompt ?? t.title)}
                   className={cn("kid-press relative flex aspect-[4/5] flex-col items-center justify-center gap-3 rounded-4xl p-4 text-center", done ? "bg-muted text-muted-foreground" : cn(TONE[subj.tone].soft, TONE[subj.tone].ink))}
                 >
                   <span className="absolute left-4 top-4 text-3xl">{subj.kidSymbol}</span>
