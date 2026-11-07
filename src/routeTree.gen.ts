@@ -16,6 +16,7 @@ import { Route as ProfesorIndexRouteImport } from './routes/profesor.index'
 import { Route as ProfesorLicenciasRouteImport } from './routes/profesor.licencias'
 import { Route as ProfesorTareasRouteImport } from './routes/profesor.tareas'
 import { Route as AlumnoStudentIdIndexRouteImport } from './routes/alumno.$studentId.index'
+import { Route as AlumnoStudentIdTareaTaskIdRouteImport } from './routes/alumno.$studentId.tarea.$taskId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,12 @@ const AlumnoStudentIdIndexRoute = AlumnoStudentIdIndexRouteImport.update({
   path: '/alumno/$studentId/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlumnoStudentIdTareaTaskIdRoute =
+  AlumnoStudentIdTareaTaskIdRouteImport.update({
+    id: '/alumno/$studentId/tarea/$taskId',
+    path: '/alumno/$studentId/tarea/$taskId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +68,7 @@ export interface FileRoutesByFullPath {
   '/alumno/': typeof AlumnoIndexRoute
   '/profesor/': typeof ProfesorIndexRoute
   '/alumno/$studentId/': typeof AlumnoStudentIdIndexRoute
+  '/alumno/$studentId/tarea/$taskId': typeof AlumnoStudentIdTareaTaskIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,6 +77,7 @@ export interface FileRoutesByTo {
   '/alumno': typeof AlumnoIndexRoute
   '/profesor': typeof ProfesorIndexRoute
   '/alumno/$studentId': typeof AlumnoStudentIdIndexRoute
+  '/alumno/$studentId/tarea/$taskId': typeof AlumnoStudentIdTareaTaskIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,6 +88,7 @@ export interface FileRoutesById {
   '/alumno/': typeof AlumnoIndexRoute
   '/profesor/': typeof ProfesorIndexRoute
   '/alumno/$studentId/': typeof AlumnoStudentIdIndexRoute
+  '/alumno/$studentId/tarea/$taskId': typeof AlumnoStudentIdTareaTaskIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -90,6 +100,7 @@ export interface FileRouteTypes {
     | '/alumno/'
     | '/profesor/'
     | '/alumno/$studentId/'
+    | '/alumno/$studentId/tarea/$taskId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,6 +109,7 @@ export interface FileRouteTypes {
     | '/alumno'
     | '/profesor'
     | '/alumno/$studentId'
+    | '/alumno/$studentId/tarea/$taskId'
   id:
     | '__root__'
     | '/'
@@ -107,6 +119,7 @@ export interface FileRouteTypes {
     | '/alumno/'
     | '/profesor/'
     | '/alumno/$studentId/'
+    | '/alumno/$studentId/tarea/$taskId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -114,6 +127,7 @@ export interface RootRouteChildren {
   ProfesorRoute: typeof ProfesorRouteWithChildren
   AlumnoIndexRoute: typeof AlumnoIndexRoute
   AlumnoStudentIdIndexRoute: typeof AlumnoStudentIdIndexRoute
+  AlumnoStudentIdTareaTaskIdRoute: typeof AlumnoStudentIdTareaTaskIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -167,6 +181,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumnoStudentIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alumno/$studentId/tarea/$taskId': {
+      id: '/alumno/$studentId/tarea/$taskId'
+      path: '/alumno/$studentId/tarea/$taskId'
+      fullPath: '/alumno/$studentId/tarea/$taskId'
+      preLoaderRoute: typeof AlumnoStudentIdTareaTaskIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -191,6 +212,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfesorRoute: ProfesorRouteWithChildren,
   AlumnoIndexRoute: AlumnoIndexRoute,
   AlumnoStudentIdIndexRoute: AlumnoStudentIdIndexRoute,
+  AlumnoStudentIdTareaTaskIdRoute: AlumnoStudentIdTareaTaskIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

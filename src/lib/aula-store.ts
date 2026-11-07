@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import { SEED_TASKS, STUDENTS, buildTask, type SubjectId, type Task } from "./aula-data";
 
 // Tiny in-memory store shared by the three modes, so a task sent by the
@@ -32,12 +32,22 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
+function shallowEqual(a: unknown, b: unknown) {
+  if (Object.is(a, b)) return true;
+  if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((v, i) => Object.is(v, b[i]));
+  return false;
+}
+
+/** Selectors may derive new arrays; results are shallow-compared to keep snapshots stable. */
 export function useAula<T>(selector: (s: AulaState) => T): T {
-  return useSyncExternalStore(
-    subscribe,
-    () => selector(state),
-    () => selector(serverState),
-  );
+  const cache = useRef<{ value: T } | null>(null);
+  const read = (src: AulaState) => {
+    const next = selector(src);
+    if (cache.current && shallowEqual(cache.current.value, next)) return cache.current.value;
+    cache.current = { value: next };
+    return next;
+  };
+  return useSyncExternalStore(subscribe, () => read(state), () => read(serverState));
 }
 
 export function getAulaState() {
