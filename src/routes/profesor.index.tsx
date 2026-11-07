@@ -52,13 +52,13 @@ function TeacherDashboard() {
   const done = tasks.filter((t) => t.status === "hecha").length;
 
   const sendReports = (ids: string[]) => {
-    setSending(ids.length > 1 ? "all" : ids[0]);
+    setSending(ids.length > 1 ? "all" : (ids[0] ?? null));
     setTimeout(() => {
       markReportSent(ids);
       setSending(null);
       const names = STUDENTS.filter((s) => ids.includes(s.id));
-      toast.success(ids.length > 1 ? `Informes enviados a ${names.length} familias` : `Informe de ${names[0].name} enviado`, {
-        description: ids.length > 1 ? "Por WhatsApp y correo, con resumen y consejos para casa." : `A ${names[0].tutor} · ${names[0].tutorContact}`,
+      toast.success(ids.length > 1 ? `Informes enviados a ${names.length} familias` : `Informe de ${names[0]?.name ?? ""} enviado`, {
+        description: ids.length > 1 ? "Por WhatsApp y correo, con resumen y consejos para casa." : `A ${names[0]?.tutor ?? ""} · ${names[0]?.tutorContact ?? ""}`,
       });
     }, 1100);
   };
