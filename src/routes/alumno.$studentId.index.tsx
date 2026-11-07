@@ -39,7 +39,7 @@ function StudentHome() {
 
   return (
     <KidShell
-      homeTo="/alumno"
+      home={{ to: "/alumno" }}
       say={`Hola, ${student.name}. Tienes ${pending} tareas. Toca una para empezar.`}
       right={
         <motion.div key={stars} initial={{ scale: 1.3 }} animate={{ scale: 1 }} className="kid-press flex h-16 items-center gap-2 rounded-full bg-sun px-5 text-sun-ink sm:h-20">
