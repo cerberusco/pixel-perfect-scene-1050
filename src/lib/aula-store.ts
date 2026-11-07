@@ -9,9 +9,11 @@ interface AulaState {
   stars: Record<string, number>;
   reportsSent: Record<string, string>; // studentId -> time label
   licenses: Record<string, string[]>; // bookId -> assigned student ids
+  familyChild: string;
 }
 
 const initialState = (): AulaState => ({
+  familyChild: "hugo",
   tasks: SEED_TASKS,
   stars: Object.fromEntries(STUDENTS.map((s) => [s.id, s.stars])),
   reportsSent: { nora: "Vie 30 oct" },
@@ -86,6 +88,10 @@ export function markReportSent(studentIds: string[]) {
     ...s,
     reportsSent: { ...s.reportsSent, ...Object.fromEntries(studentIds.map((id) => [id, "Hoy"])) },
   }));
+}
+
+export function setFamilyChild(id: string) {
+  setState((s) => ({ ...s, familyChild: id }));
 }
 
 export function setLicenseAssignment(bookId: string, studentIds: string[]) {
